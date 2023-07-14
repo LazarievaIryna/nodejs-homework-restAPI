@@ -2,7 +2,7 @@
 const {Schema, model} = require("mongoose");
 const Joi = require("joi");
 
-// const {handleMongooseError} = require("../helpers");
+
 
 const contactSchema=new Schema(
   {
@@ -22,11 +22,14 @@ const contactSchema=new Schema(
     },
   }, {versionKey: false, timestamps: true}
 )
-// contactSchema.post("save", handleMongooseError);
+
 const addSchema = Joi.object({
   name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
+  email: Joi.string()
+  .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
+  .required(),
+  phone: Joi.string().min(7)
+  .required(),
   favorite: Joi.boolean(),
 
 });
@@ -46,20 +49,3 @@ module.exports = {
   schemas,
 }
 
-// const listContacts = async () => {}
-
-// const getContactById = async (contactId) => {}
-
-// const removeContact = async (contactId) => {}
-
-// const addContact = async (body) => {}
-
-// const updateContact = async (contactId, body) => {}
-
-// module.exports = {
-//   listContacts,
-//   getContactById,
-//   removeContact,
-//   addContact,
-//   updateContact,
-// }
