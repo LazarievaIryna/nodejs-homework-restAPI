@@ -1,6 +1,6 @@
 const express = require("express");
 
-const ctrl = require("../../controllers/auth");
+const ctrl = require("../../controlles/auth");
 
 const {validateBody, authenticate} = require("../../middlewares");
 
@@ -17,6 +17,6 @@ router.get("/current", authenticate, ctrl.getCurrent);
 
 router.post("/logout", authenticate, ctrl.logout);
 
-router.patch("/", authenticate, validateBody(updateSubscriptionSchema),ctrl.updateSubscritionType );
+router.patch("/", authenticate, validateBody(schemas.updateSubscriptionSchema),ctrl.updateSubscritionType );
 
 module.exports = router;
