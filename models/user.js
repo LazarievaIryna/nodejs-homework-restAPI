@@ -1,7 +1,7 @@
 const {Schema, model} = require("mongoose");
 const Joi = require("joi");
 
-const {handleMongooseError} = require("../middlewares");
+
 const subscriptionTypes = ["starter", "pro", "business"];
 
 const userSchema = new Schema(

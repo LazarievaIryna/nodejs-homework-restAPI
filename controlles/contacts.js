@@ -6,6 +6,7 @@ const listContacts = async (req, res) => {
   const {_id: owner} = req.user;
   const {page = 1, limit = 20} = req.query;
   const skip = (page - 1) * limit;
+  console.log(req)
   const result = await Contact.find({owner}, "-createdAt -updatedAt", {skip, limit});
     res.json({
       status: 'success',
@@ -33,7 +34,7 @@ const addContact  = async (req, res) => {
     if (error) {
       throw HttpError(400, `Missing required name field`)
     }
-    const result = await Book.create({...req.body, owner});
+    const result = await Contact.create({...req.body, owner});
     res.status(201).json({
       status: 'success',
       code: 201,
