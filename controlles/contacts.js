@@ -93,6 +93,29 @@ const removeContact  = async (req, res) => {
     }
 }
 
+
+const FavoriteList = async (req, res) => {
+  const {_id: owner} = req.user;
+  
+  const { favorite } = req.query;
+  console.log(owner)
+  const result = await Contact.find({owner, favorite});
+ 
+    res.json({
+      status: 'success',
+      code: 200,
+      data: {
+        contact: result,
+      },
+    })
+  
+    
+}
+
+
+
+
+
 module.exports = {
     listContacts: ctrlWrapper(listContacts),
     getContactById: ctrlWrapper(getContactById),
@@ -100,4 +123,5 @@ module.exports = {
     updateContact: ctrlWrapper(updateContact),
     updateFavorite: ctrlWrapper(updateFavorite),
     removeContact: ctrlWrapper(removeContact),
+    FavoriteList: ctrlWrapper(FavoriteList),
 }

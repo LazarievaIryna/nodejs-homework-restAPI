@@ -21,5 +21,6 @@ router.put("/:id", authenticate, isValidId, validateBody(schemas.addSchema), ctr
 router.patch("/:id/favorite", authenticate, isValidId, validateBody(schemas.updateFavoriteSchema), ctrl.updateFavorite);
 
 router.delete("/:id", authenticate, isValidId, ctrl.removeContact);
+router.patch("/", authenticate,  ctrl.FavoriteList);
 
 module.exports = router;
